@@ -1,0 +1,19 @@
+{
+  "name": "streamer",
+  "version": "1.0.0",
+  "description": "A backedn project with javascript at chai",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "backend",
+    "chai",
+    "aur",
+    "code",
+    "backend"
+  ],
+  "author": "",
+  "license": "ISC"
+}
