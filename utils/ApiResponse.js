@@ -1,6 +1,6 @@
 class ApiResponse {
 
-    ApiResponse(statusCode,data,message = "Success",success=true) {
+    constructor(statusCode,data,message = "Success",success=true) {
         this.statusCode = statusCode;//stauscode is used to find request is success or failure request
         this.data = data;// data to send in response
         this.message = message;// message to send in response
