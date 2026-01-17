@@ -50,14 +50,13 @@ const userSchema = new mongoose.Schema( {
     { timestamps: true }
 );
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
     // hash the password before saving the user model using pre hook(a middleware that is executed before saving data inside db).
 
     if (!this.isModified('password')) {
-        return next();
+        return;
     }
     this.password = await bcrypt.hash(this.password, 10);
-    next();
 });
 
 userSchema.methods.isPassweordCorrect = async function (password) {

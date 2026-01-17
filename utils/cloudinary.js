@@ -21,7 +21,7 @@ const uploadonCloudinary = async (localFilePath) => {
         // after uploading the file to cloudinary we can delete the local file to save space on server.
         console.log("Cloudinary upload result:", result);
         fs.unlinkSync(localFilePath);
-        return result.secure_url;// return the cloudinary url of uploaded file.
+        return result;// return the cloudinary url of uploaded file.
     }
     catch(error){
         fs.unlinkSync(localFilePath);// remove locally saved file as upload on cloudinary has failed.
