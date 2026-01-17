@@ -1,7 +1,7 @@
-import ApiError from "../../utils/ApiError.js";
-import User from "../models/user.model.js";
-import { uploadToCloudinary } from "../utils/cloudinary.js";
-import ApiResponse from "../../utils/ApiResponse.js";
+import { ApiError_ } from "../../utils/ApiError_.js";
+import { User } from "../models/user.models.js";
+import { uploadonCloudinary } from "../../utils/cloudinary.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
 
 const registerUser = async (req,res) =>{
     // Registration logic here
@@ -20,7 +20,7 @@ const registerUser = async (req,res) =>{
     console.log("Registering user:", { email, username });
 
     if(!fullname || !email || !username || !password){
-        throw new ApiError(400,"All fields are required for registration");
+        throw new ApiError_(400,"All fields are required for registration");
     }
 
 
@@ -32,23 +32,23 @@ const registerUser = async (req,res) =>{
     })
 
     if(existiedUser){
-        throw new ApiError(409,"User with given email or username already exists");
+        throw new ApiError_(409,"User with given email or username already exists");
     }
 
     console.log("File received:", req.files);
     const avatarLocalPath = req.files?.avatar[0]?.path;// optional chaining to avoid error if no file is uploaded
-    const coverImageLocalPath = req.files?.coverimages[0]?.path;
+    const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
 
     if(!avatarLocalPath){
-        throw new ApiError(400,"Avatar image is required");
+        throw new ApiError_(400,"Avatar image is required");
     }
 
 
-    const avatarImageUploadResponse = await uploadToCloudinary(avatarLocalPath, "UserAvatars");
-    const coverImageUploadResponse = coverImageLocalPath ? await uploadToCloudinary(coverImageLocalPath, "UserCoverImages") : null;
+    const avatarImageUploadResponse = await uploadonCloudinary(avatarLocalPath, "UserAvatars");
+    const coverImageUploadResponse = coverImageLocalPath ? await uploadonCloudinary(coverImageLocalPath, "UserCoverImages") : null;
 
     if(!avatarImageUploadResponse?.secure_url){
-        throw new ApiError(500,"Error in uploading avatar image to cloudinary");
+        throw new ApiError_(500,"Error in uploading avatar image to cloudinary");
     }
 
     const newUser = await User.create({
@@ -61,7 +61,7 @@ const registerUser = async (req,res) =>{
     })
 
     if(User.findById(newUser._id)){
-        throw new ApiError(500,"Error in creating user");
+        throw new ApiError_(500,"Error in creating user");
     }
 
     newUser.password= undefined;
