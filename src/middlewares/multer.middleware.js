@@ -2,7 +2,7 @@ import multer from 'multer';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log(req.file);
+        console.log("file is ", req.files);
         cb(null, "./public/temp"); // specify the destination directory. cb is a callback function used for asynchronous operations.
     },
     filename: function (req, file, cb) {
