@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginUser, logoutUser, registerUser, refreshAccessToken } from "../controllers/user.controller.js";
+import { loginUser, logoutUser, registerUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage } from "../controllers/user.controller.js";
 import {upload} from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -25,7 +25,32 @@ router.route("/logout").post(
     verifyJWT,
     logoutUser);
 
-router.route("/refresh-token", refreshAccessToken);
+router.route("/refresh-token").post(
+    verifyJWT,
+    refreshAccessToken);
+
+router.route("/change-password").post(
+    verifyJWT,
+    changeCurrentPassword);
+
+router.route("/getUserDetails").get(
+    verifyJWT,
+    getCurrentUser);
+
+router.route("/update-user-account-details").post(
+    verifyJWT,
+    updateAccountDetails);
+
+router.route("/change-avatar").post(
+    verifyJWT,
+    updateUserAvatar
+);
+
+router.route("/change-coverImage").post(
+    verifyJWT,
+    updateUserCoverImage
+);
+
 
 export default router;// default mean when we import this file we can give any name to the imported object.
 
