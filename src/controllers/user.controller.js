@@ -359,7 +359,7 @@ const getUserChannelProfile = async (req, res) => {
     const { username } = req.params;
 
     if (!username?.trim()) {
-        throw new ApiError(400, "Username is missing");
+        throw new ApiError_(400, "Username is missing");
     }
 
     const channelInfo = await User.aggregate([
@@ -421,7 +421,7 @@ const getUserChannelProfile = async (req, res) => {
     ]);
 
     if (!channelInfo.length) {
-        throw new ApiError(404, "Channel not found");
+        throw new ApiError_(404, "Channel not found");
     }
 
     return res.status(200).
@@ -433,7 +433,7 @@ const getUserWatchHistory = async(req,res)=>{
     const userid = user?._id;
 
     if(userid){
-        throw new ApiError(400, "User ID is missing");
+        throw new ApiError_(400, "User ID is missing");
      } 
 
      const watchHistory = User.aggregate( [ {
