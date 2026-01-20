@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginUser, logoutUser, registerUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage } from "../controllers/user.controller.js";
+import { loginUser, logoutUser, registerUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage, getUserChannelProfile, getUserWatchHistory } from "../controllers/user.controller.js";
 import {upload} from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -37,20 +37,31 @@ router.route("/getUserDetails").get(
     verifyJWT,
     getCurrentUser);
 
-router.route("/update-user-account-details").post(
+router.route("/update-user-account-details").patch(
     verifyJWT,
     updateAccountDetails);
 
-router.route("/change-avatar").post(
+router.route("/change-avatar").patch(
     verifyJWT,
+    upload.single("avatar"), //Required
     updateUserAvatar
 );
 
-router.route("/change-coverImage").post(
+router.route("/change-coverImage").patch(
     verifyJWT,
+    upload.single("coverImage"), 
     updateUserCoverImage
 );
 
+router.route("/c/:username").get(
+    verifyJWT,
+    getUserChannelProfile
+)
+
+router.route("/history").get(
+    verifyJWT,
+    getUserWatchHistory
+)
 
 export default router;// default mean when we import this file we can give any name to the imported object.
 
