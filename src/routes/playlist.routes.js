@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getPlaylistById, getUserPlaylists, createPlaylist, deletePlaylist, updatePlaylistDetails, addVideoToPlaylist, removeVideoFromPlaylist } from "../controllers/playlist.controller";
-import { upload } from "../middlewares/multer.middleware";
+import { getPlaylistById, getUserPlaylists, createPlaylist, deletePlaylist, updatePlaylistDetails, addVideoToPlaylist, removeVideoFromPlaylist } from "../controllers/playlist.controller.js";
+import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import multer from "multer";
 
@@ -12,7 +12,7 @@ router.route("/").post( // "/" is default route for creating playlist
     createPlaylist
 );
 
-router.route("/get-user-playlists").get(
+router.route("/user/:userid").get(
     getUserPlaylists
 );
 
