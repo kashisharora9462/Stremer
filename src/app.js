@@ -20,11 +20,12 @@ app.use(express.static('public')); //to serve static files like images,css from 
 
 import userRouter from './routes/user.routes.js';
 import playlistRouter from './routes/playlist.routes.js';
+import videoRouter from './routes/video.routes.js'
 
 //use
 
 app.use("/api/v1/users", userRouter);// use userRouter for all routes starting with /api/v1/users
 app.use("/api/v1/playlists", playlistRouter);// use playlistRouter for all routes starting with /api/v1/playlists
-
+app.use("/api/v1/videos", videoRouter)
 
 export default app;
