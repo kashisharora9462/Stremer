@@ -23,6 +23,7 @@ import playlistRouter from './routes/playlist.routes.js';
 import videoRouter from './routes/video.routes.js'
 import subscriptionRoute from './routes/subscription.routes.js'
 import LikeRouter from './routes/like.routes.js'
+import commentRouter from './routes/comment.routes.js'
 
 //use
 
@@ -31,5 +32,6 @@ app.use("/api/v1/playlists", playlistRouter);// use playlistRouter for all route
 app.use("/api/v1/videos", videoRouter);
 app.use("/api/v1/subscription", subscriptionRoute)
 app.use("/api/v1/Like",LikeRouter)
+app.use("/api/v1/comment",commentRouter)
 
 export default app;
