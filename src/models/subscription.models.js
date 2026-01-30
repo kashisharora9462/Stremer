@@ -3,11 +3,11 @@ import { User } from "./user.models.js"
 
 const subscriptionSchema = new mongoose.Schema({
     "channel":{
-        type: Schema.Types.ObjectId,// one to whom user is subscribing
+        type: mongoose.Schema.Types.ObjectId,// one to whom user is subscribing
         ref: "User"
     },
     "subscriber":{
-        type: Schema.Types.ObjectId,// one who is subscribing
+        type: mongoose.Schema.Types.ObjectId,// one who is subscribing
         ref: "User"
     }
 },
